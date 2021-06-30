@@ -3,9 +3,9 @@ function [robotPoses, coorditheta] = kw_imshow(coordix, coordiy)
    
     showimg = cat(3, coveragedMap, coveragedMap, coveragedMap);
     imshow(showimg);
-    color=[1,0,0;0,1,0;0,0,1;1,1,0;0,1,1];
+    color=[1,0,0;0,1,0;0,0,1;1,1,0;0,1,1; 1,0,1];
     % imshow(coveragedMap);
-    for i=1:5
+    for i=1:6
         if isnan(coordix{i})
             continue;
         end

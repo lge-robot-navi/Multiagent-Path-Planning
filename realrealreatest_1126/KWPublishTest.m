@@ -5,14 +5,14 @@ reqType = "INIT";    %ABNORMAL  LOWBAT INIT
 agentId = 0;
 
 robotId = [1;2;3;4];
-posx = [6;2;2;7];
-posy = [0;1;2;3];
-curTargetx = [0;3;2;9];
-curTargety = [0;3;6;5];
-curTargetTheta = [0;3;2;4];
-prevTargetx = [1;1;3;2];
-prevTargety = [8;0;3;3];
-prevTargetTheta = [0;3;0;4];
+posx = [2;2;2;7];
+posy = [1;3;2;3];
+curTargetx = [3;2;2;9];
+curTargety = [3;6;2;5];
+curTargetTheta = [3;2;2;4];
+prevTargetx = [1;3;2;2];
+prevTargety = [0;3;3;2];
+prevTargetTheta = [3;0;2;4];
 
 robots = table(robotId, posx, posy, curTargetx, curTargety, ...
     curTargetTheta, prevTargetx, prevTargety, prevTargetTheta);
@@ -29,8 +29,8 @@ s = jsonencode(S);
 % publish(myMQTTFunc, transParam.transtopic,s);
 % disp('published to Server');
 
-myMQTTFunc = mqtt(transParam.transhost);
-publish(myMQTTFunc, transParam.revtopic,s,'Qos', 2, 'Retain', true);
+myMQTTFunc = mqtt(transParam.revhost);
+publish(myMQTTFunc, transParam.revtopic,s,'Qos', 0, 'Retain', false);
 disp('published to Client');
 %% publish to client 
 

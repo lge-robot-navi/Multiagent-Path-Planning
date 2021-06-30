@@ -1,4 +1,4 @@
-function [shortestPath,shortestPathLength] = onewaypath(binaryImage,x,y,dmat,idxx,L_range,Rangeconstant)
+function [shortestPath] = onewaypath(binaryImage,x,y,dmat,idxx,L_range,Rangeconstant,cost)
 %% 각 로봇당 최종 이동 노드들에 대해 실제 순찰 TRAJECTORY 생성
 % dmat = [];
 % nPoints = 0;
@@ -70,8 +70,17 @@ function [shortestPath,shortestPathLength] = onewaypath(binaryImage,x,y,dmat,idx
 % end
 
 dmat = dmat(idxx,idxx);
-
-
+% unique_all_vertex = [x y];
+% userConfig = struct('showProg',false,'showResult',false,'showWaitbar',false,'xy',unique_all_vertex,'dmat',dmat,'popSize',1000,'numIter',1e4);
+% resultStruct = tsp_ga(userConfig);
+% figure(1)
+% hold on;
+% plot(unique_all_vertex(resultStruct.optRoute,2),unique_all_vertex(resultStruct.optRoute,1),'b','LineWidth',4);
+% shortestPath=resultStruct.optRoute; 
+% fprintf('Single Robot TSP completed\n');
+% % pause;
+% % 
+% cost = 50;
 shortestPath = [];
 N_cities = size(x,1);
 totalcount = 1;
@@ -102,9 +111,11 @@ for i =  1:N_cities
     path(end+1,1) = inextCity;
     distanceTraveled = distanceTraveled +...
     dmat(currentCity,inextCity);
-    distancesNew(currentCity,:) =   distancesNew(currentCity,:)*2;
-%     distancesNew(:,currentCity) =   distancesNew(:,currentCity)*2;
+    distancesNew(currentCity,:) =   distancesNew(currentCity,:)*cost;
+     distancesNew(:,currentCity) =   distancesNew(:,currentCity)*cost;
 
+     distancesNew(currentCity,inextCity) =   distancesNew(currentCity,inextCity)*cost;
+     distancesNew(inextCity,currentCity) =   distancesNew(inextCity,currentCity)*cost;
     currentCity = inextCity;
     bool_unique_all_vertex(currentCity) = 1;              
 
@@ -112,7 +123,7 @@ for i =  1:N_cities
           continue;
       end
       totalcount = totalcount+1;
-      if(totalcount>10000)
+      if(totalcount>100000)
           break;
       end
 %               pause;
@@ -123,3 +134,4 @@ for i =  1:N_cities
         shortestPath = path; 
     end             
 end
+

@@ -18,7 +18,7 @@ xindex = [xindex unique_all_vertex_base(:,1)'];
 avg_node = total_node/D_RobotNum;
 [cluster_val,cluster_order] = sort(nodenum,'descend');                
 % idx2Region = spectralcluster([yindex',xindex'],D_RobotNum,'Distance','mahalanobis');%kmeans([yindex',xindex'],D_RobotNum); 
-idx2Region = kmeans([yindex',xindex'],D_RobotNum,'MaxIter',3); 
+idx2Region = kmeans([yindex',xindex'],D_RobotNum,'MaxIter',5); 
         
          ccoordix{D_RobotNum} = [];
          ccoordiy{D_RobotNum} = [];

@@ -5,7 +5,7 @@ global sensorParam binaryMap coveragedMap;
     cll = 0; robot=0; node=0; point=0; phase=0; celln = 0;
     min = 5000;
     
-    for robotn = 1:5
+    for robotn = 1:6
         ix = coordix{robotn};
         iy = coordiy{robotn};
         len = length(ix);          

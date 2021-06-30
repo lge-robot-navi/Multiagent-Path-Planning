@@ -8,7 +8,7 @@ function KWcalcMapCoverage(coordix, coordiy, show_flag)
     % imshow(coveragedMap);
 %     coveragedMap = cat(3, binaryMap, binaryMap, binaryMap);
                         
-    for robot = 1:5
+    for robot = 1:6
         disp([num2str(robot), ' Robot']);
         ix = coordix{robot};
         iy = coordiy{robot};
@@ -90,8 +90,8 @@ function wwww(coordix, coordiy, show_flag)
     imshow(coveragedMap);
 %     coveragedMap = cat(3, binaryMap, binaryMap, binaryMap);
     
-    max = 0;
-    for robot = 1:5
+    max = 0
+    for robot = 1:6
         ix = coordix{robot};
         if numel(ix) > max
             max = numel(ix);
@@ -100,7 +100,7 @@ function wwww(coordix, coordiy, show_flag)
     %%
     zeros(1, 10)
     %%
-    for robot = 1:5
+    for robot = 1:6
         arrx = zeros(1, max);
         arry = zeros(1, max);
         ix = coordix{robot};
@@ -111,7 +111,7 @@ function wwww(coordix, coordiy, show_flag)
         end
     end
 
-    for robot = 1:5
+    for robot = 1:6
         ix = coordix{robot};
         iy = coordiy{robot};
 

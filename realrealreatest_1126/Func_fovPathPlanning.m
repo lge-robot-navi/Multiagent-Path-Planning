@@ -15,8 +15,8 @@ function [coordix, coordiy, coorditheta, robotPoses] = Func_fovPathPlanning(img_
     KWloadSensorParam();
     %% 커버리지 계산
     KWcalcMapCoverage(coordix, coordiy, 0);    % coverager Map이 binary Map의 3DoF으로 초기화 됨
-    kw_imshow(coordix, coordiy);
-    kw_dispCoveragePercent();
+%     kw_imshow(coordix, coordiy);
+%     kw_dispCoveragePercent();
     %% KWfindUncoveragedArea()
 
     % [uncoveragedCluster, mode] = KWfindUncoveragedArea();
@@ -70,26 +70,27 @@ function [coordix, coordiy, coorditheta, robotPoses] = Func_fovPathPlanning(img_
     end
 
 %%  new coveraged calculate
-%      for robot = 1:5
-%          if isnan(coordix{robot})
-%              continue;
-%          end
-%         fx = coordix{robot};
-%         fy = coordiy{robot};
+     for robot = 1:6
+         if isnan(coordix{robot})
+             continue;
+         end
+        fx = coordix{robot};
+        fy = coordiy{robot};
 %         ix = icoordix{robot};
 %         iy = icoordiy{robot};
-%         coordix{robot} = [fx(:,1:end), fliplr(ix(:,1:end-1))];
-%         coordiy{robot} = [fy(:,1:end), fliplr(iy(:,1:end-1))];
-%      end
+        coordix{robot} = [fx(:,1:end), fliplr(fx(:,1:end-1))];
+        coordiy{robot} = [fy(:,1:end), fliplr(fy(:,1:end-1))];
+     end
      
     KWcalcMapCoverage(coordix, coordiy, show_flag);    % coverager Map이 binary Map의 3DoF으로 초기화 됨
     
     disp('알고리즘이 종료 되었습니다.');
+
     [robotPoses, coorditheta] = kw_imshow(coordix, coordiy);
     kw_dispCoveragePercent();
     
     [coordix, coordiy, coorditheta, robotPoses] = KWdataPreProcessing2(coordix, coordiy, coorditheta, robotPoses);
-    save('PrevkwResults.mat', 'coordix', 'coordiy', 'coorditheta', 'robotPoses');
+    % save('PrevkwResults.mat', 'coordix', 'coordiy', 'coorditheta', 'robotPoses');
 
 end
 
