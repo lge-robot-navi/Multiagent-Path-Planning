@@ -25,7 +25,7 @@ height=1000;
 Rangeconstant = 2.5;
 
 %% 가용 로봇대수 %%
-D_RobotNum = 2;
+D_RobotNum = 3;
 %% 가용 로봇대수 %%
 POI_RobotNum = 1;
 POI = 2; % on off 2
